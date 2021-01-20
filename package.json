@@ -1,0 +1,22 @@
+{
+  "name": "tc_glu",
+  "version": "1.0.0",
+  "description": "WebGL utility functions",
+  "main": "gl_utilities.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Takebon/tc_glu.git"
+  },
+  "keywords": [
+    "WebGL"
+  ],
+  "author": "TakebonCog",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Takebon/tc_glu/issues"
+  },
+  "homepage": "https://github.com/Takebon/tc_glu#readme"
+}
