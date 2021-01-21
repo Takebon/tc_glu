@@ -67,7 +67,7 @@
 			vstr = vstr.length < 20 && document.getElementById(vstr) ? document.getElementById(vstr).textContent : vstr
 			fstr = fstr.length < 20 && document.getElementById(fstr) ? document.getElementById(fstr).textContent : fstr
 
-			let program = gl.createProgram()	
+			let program = gl.createProgram()
 			let vshader = this.TC_GLU.createShader(gl, vstr, gl.VERTEX_SHADER)
 			let fshader = this.TC_GLU.createShader(gl, fstr, gl.FRAGMENT_SHADER)
 
@@ -99,7 +99,7 @@
 			gl.enableVertexAttribArray(positionLocation)
 			gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, gl.FALSE, 0, 0)
 		},
-		setUni: (gl, program, name, args, int = false) => {    
+		setUni: (gl, program, name, args, int = false) => {
 			gl.useProgram(program)
 			if (!program[name]) program[name] = gl.getUniformLocation(program, name)
 			if (int || typeof args == 'boolean') gl.uniform1i(program[name], args)
@@ -122,16 +122,27 @@
 			gl.bindBuffer(gl.ARRAY_BUFFER, buffer)
 			gl.bufferData(gl.ARRAY_BUFFER, verts, gl.STATIC_DRAW)
 		},
-		getType: () => {
-			let type, ext
-			if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-				ext = gl.getExtension('OES_texture_half_float')
-				type = ext.HALF_FLOAT_OES
+		getType: (gl, version) => {
+			let type
+			if (version === 'webgl2' || version == 2) {
+				console.log()
+				if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+					type = gl.HALF_FLOAT_OES
+				} else {
+					type = gl.FLOAT
+				}
+				return type
 			} else {
-				ext = gl.getExtension('OES_texture_float')
-				type = gl.FLOAT
+				let ext
+				if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+					ext = gl.getExtension('OES_texture_half_float')
+					type = ext.HALF_FLOAT_OES
+				} else {
+					ext = gl.getExtension('OES_texture_float')
+					type = gl.FLOAT
+				}
+				return type
 			}
-			return type
-		}
+		},
 	}
 })(this)

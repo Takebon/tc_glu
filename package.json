@@ -1,6 +1,6 @@
 {
   "name": "tc_glu",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "WebGL utility functions",
   "main": "gl_utilities.js",
   "scripts": {
